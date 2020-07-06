@@ -1,4 +1,5 @@
 #include <CGUI.hh>
+//#include <Windows.h> // Include in order to hide console window
 
 using namespace CGui;
 
@@ -25,6 +26,9 @@ static void submited(Button* sender, Entry* email, Entry* passwd)
 
 int main(int argc, char* argv[])
 {
+	// Hide the console window
+	/*::ShowWindow(::GetConsoleWindow(), SW_HIDE);*/
+
 	Init init(argc, argv);
 
 	CssProvider cssProvider("style.css", Priority::APPLICATION);
