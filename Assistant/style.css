@@ -1,0 +1,12 @@
+.assistant {
+    background-image: url("dark.jpg");
+    background-position: center;
+    /*background-repeat: round;*/
+    font-family: 'Cascadia Code';
+}
+
+.text-button {
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+}

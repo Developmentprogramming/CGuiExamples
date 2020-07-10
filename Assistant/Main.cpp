@@ -35,13 +35,16 @@ int main(int argc, char* argv[])
 {
 	Init init(argc, argv);
 
-	Assistant assistant;
+	CssProvider cssProvider("style.css", Priority::APPLICATION);
 
-	EventHandler el(&assistant);
+	Assistant assistant;
+	assistant.AddStyleClass("assistant");
+
+	Handler el(&assistant);
 	el.SignalHandler(Signals::CANCEL, CGui::MainQuit);
 
 	// Get Started Page
-	Label first_label("Press Next to continue.");
+	Label first_label("Press Next to continue.\nThis is the demo for Assistant");
 	assistant.AppendPage(first_label);
 	assistant.PageTitle(first_label, "Get Started");
 	assistant.PageType(first_label, AssistantPageType::INTRO);
@@ -51,13 +54,12 @@ int main(int argc, char* argv[])
 	MessageDialog ask_dialog(*dynamic_cast<Window*>(&assistant), DialogFlags::DESTORY_WITH_PARENT, MessageType::QUESTION, ButtonsType::YES_NO);
 	ask_dialog.SecondaryText("Do you accept the terms and conditions ?");
 	ask_dialog.Decorated(false);
-	ask_dialog.Resizable(false);
 	ask_dialog.DefaultSize(200, 100);
 	Box vbox(Orientation::VERTICAL, 10);
 	Label accept_terms("This is the terms and conditions....");
 	CheckButton accept_button("Accept terms and conditions");
 	accept_button.Toggled(ForwardNext, ask_dialog, assistant, vbox);
-	vbox.AddStart(accept_terms);
+	vbox.CenterWidget(accept_terms);
 	vbox.AddEnd(accept_button);
 	assistant.AppendPage(vbox);
 	assistant.PageTitle(vbox, "Terms and Conditions");
